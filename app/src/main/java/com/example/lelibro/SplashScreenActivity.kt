@@ -2,28 +2,47 @@ package com.example.lelibro
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import com.google.firebase.auth.FirebaseAuth
 
 class SplashScreenActivity : AppCompatActivity() {
+    private lateinit var mAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+
+        mAuth = FirebaseAuth.getInstance()
+
+        // Hide Status Bar using WindowInsetsController
         val decorView = window.decorView
-        // Hide the status bar.
-        val uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN
-        decorView.systemUiVisibility = uiOptions
+        val controller = ViewCompat.getWindowInsetsController(decorView)
+        controller?.hide(WindowInsetsCompat.Type.statusBars())
+        controller?.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
         // Hide ActionBar
         supportActionBar?.hide()
 
-        // Timer
-        android.os.Handler().postDelayed({
-            startActivity(Intent(this@SplashScreenActivity, intro_page::class.java))
+        // Timer to move to Intro Page
+        android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+            CheckLogin()
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out) // Optional transition animation
             finish()
         }, 3000)
+    }
+
+    private fun CheckLogin(){
+        // Cek apakah ada pengguna yang sudah login
+        val currentUser= mAuth.currentUser
+        if (currentUser != null) {
+            // Jika sudah login, langsung ke MainActivity
+            startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+        } else {
+            // Jika belum login, arahkan ke intro_page
+            startActivity(Intent(this@SplashScreenActivity, intro_page::class.java))
+        }
+        finish()
     }
 }
