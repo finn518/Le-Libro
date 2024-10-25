@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var rv: RecyclerView
     private lateinit var bookAdapter: BookAdapter
     private var ListBook: MutableList<Book> = mutableListOf()
-    private lateinit var bookListener: ValueEventListener
     private lateinit var bookdb: DatabaseReference
     private val ADD_BOOK_REQUEST_CODE = 1
 
@@ -63,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         bookdb = FirebaseDatabase.getInstance("https://le-libro-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("LeLibro")
 
-        bookListener = object : ValueEventListener {
+        bookdb.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 ListBook.clear()
                 for (noteSnapshot in snapshot.children) {
@@ -79,11 +78,10 @@ class MainActivity : AppCompatActivity() {
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(this@MainActivity, "Failed to load Book.", Toast.LENGTH_SHORT).show()
             }
-        }
+        })
     }
 
     private fun LogoutFun() {
-        bookdb.removeEventListener(bookListener)
         mAuth.signOut()
         Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show()
 
