@@ -11,6 +11,7 @@
         android:layout_marginBottom="20dp"
         app:cardBackgroundColor="#59707070"
         app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -24,7 +25,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="12dp"
-            android:layout_marginRight="12dp"
+            android:layout_marginRight="10dp"
             app:cardCornerRadius="8dp">
 
             <ImageView
@@ -46,6 +47,7 @@
             android:fontFamily="@font/rosarivo"
             android:gravity="center"
             android:text="Judul"
+            android:textColor="#FFFFFF"
             android:textSize="20dp" />
 
         <TextView
@@ -58,6 +60,7 @@
             android:fontFamily="@font/rosarivo"
             android:gravity="center"
             android:text="Penulis"
+            android:textColor="#FFFFFF"
             android:textSize="18dp" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
