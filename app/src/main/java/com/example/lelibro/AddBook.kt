@@ -1,25 +1,30 @@
 package com.example.lelibro
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.TextUtils
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.ScrollView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import java.io.ByteArrayOutputStream
+import java.io.IOException
 
 class AddBook : AppCompatActivity() {
     private lateinit var back_popup: ImageButton
@@ -31,6 +36,7 @@ class AddBook : AppCompatActivity() {
     private lateinit var upItem: Button
     private lateinit var bookdb: DatabaseReference
     private var ListBook: MutableList<Book> = mutableListOf()
+    private val DEFAULT_IMAGE_URL = "https://drive.google.com/file/d/102OuLDql0GymVcHPJpQwxgK05aUD1Puu/view"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,29 +50,22 @@ class AddBook : AppCompatActivity() {
         addGenre = findViewById(R.id.add_genre)
         upItem = findViewById(R.id.btn_upload)
 
-
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        val userId = currentUser!!.uid
         bookdb = FirebaseDatabase.getInstance("https://le-libro-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("LeLibro")
 
-        bookdb.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                ListBook.clear()
-                for (noteSnapshot in snapshot.children) {
-                    val book = noteSnapshot.getValue(Book::class.java)
-                    book?.id = noteSnapshot.key
-                    if (book != null) {
-                        ListBook.add(book)
-                    }
-                }
-                BookAdapter.notifyDataSetChanged()
-            }
+        back_popup.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
 
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@AddBook, "Failed to load Book.", Toast.LENGTH_SHORT).show()
+        upItem.setOnClickListener {
+            if (!validateForm()) {
+                return@setOnClickListener
             }
-        })
+            val bookId = bookdb.push().key ?: return@setOnClickListener
+            uploadImg(bookId) { imageUrl ->
+                saveBookData(bookId, imageUrl)
+            }
+        }
 
         add_cover.setOnClickListener {
             selectImage()
@@ -92,5 +91,123 @@ class AddBook : AppCompatActivity() {
             }
         }
         builder.show()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 20 && resultCode == RESULT_OK && data != null) {
+            val path: Uri? = data.data
+            val thread = Thread {
+                try {
+                    val inputStream = contentResolver.openInputStream(path!!)
+                    val bitmap = BitmapFactory.decodeStream(inputStream)
+                    add_cover.post {
+                        add_cover.setImageBitmap(bitmap)
+                    }
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+            thread.start()
+        }
+
+        if (requestCode == 10 && resultCode == RESULT_OK) {
+            val extras = data?.extras
+            val thread = Thread {
+                val bitmap = extras?.get("data") as Bitmap
+                add_cover.post {
+                    add_cover.setImageBitmap(bitmap)
+                }
+            }
+            thread.start()
+        }
+    }
+
+    private fun uploadImg(bookId: String, onComplete: (String) -> Unit) {
+        if (add_cover.drawable == null) {
+            onComplete(DEFAULT_IMAGE_URL)
+            return
+        }
+        add_cover.isDrawingCacheEnabled = true
+        add_cover.buildDrawingCache()
+        val drawable = add_cover.drawable
+        if (drawable is BitmapDrawable) {
+            val bitmap = drawable.bitmap
+            val baos = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+            val data = baos.toByteArray()
+
+            val storage = FirebaseStorage.getInstance()
+            val storageRef = storage.reference.child("images/$bookId.jpeg")
+            val uploadTask = storageRef.putBytes(data)
+            uploadTask.addOnFailureListener { exception ->
+                Toast.makeText(this, "Failed to upload image: ${exception.message}", Toast.LENGTH_SHORT).show()
+                onComplete(DEFAULT_IMAGE_URL)
+            }.addOnSuccessListener { taskSnapshot ->
+                taskSnapshot.metadata?.reference?.downloadUrl?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val downloadUrl = task.result.toString()
+                        onComplete(downloadUrl)
+                    } else {
+                        Toast.makeText(this, "Failed to get download URL", Toast.LENGTH_SHORT).show()
+                        onComplete(DEFAULT_IMAGE_URL)
+                    }
+                }
+            }
+        } else {
+            onComplete(DEFAULT_IMAGE_URL)
+        }
+    }
+
+    private fun saveBookData(bookId: String, imageUrl: String) {
+        val judul = addJudul.text.toString()
+        val penulis = addPenulis.text.toString()
+        val desc = addDesk.text.toString()
+        val genre = addGenre.text.toString()
+
+        val books = Book(
+            id = bookId,
+            judul = judul,
+            penulis = penulis,
+            deskripsi = desc,
+            genre = genre,
+            cover = imageUrl
+        )
+        bookdb.child(bookId).setValue(books).addOnSuccessListener {
+            Toast.makeText(this@AddBook, "Book added", Toast.LENGTH_SHORT).show()
+            setResult(RESULT_OK)
+            finish()
+        }.addOnFailureListener {
+            Toast.makeText(this@AddBook, "Failed to add book", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun validateForm(): Boolean {
+        var result = true
+        if (TextUtils.isEmpty(addJudul.text.toString())) {
+            addJudul.error = "Required"
+            result = false
+        } else {
+            addJudul.error = null
+        }
+        if (TextUtils.isEmpty(addPenulis.text.toString())) {
+            addPenulis.error = "Required"
+            result = false
+        } else {
+            addPenulis.error = null
+        }
+        if (TextUtils.isEmpty(addDesk.text.toString())) {
+            addDesk.error = "Required"
+            result = false
+        } else {
+            addDesk.error = null
+        }
+        if (TextUtils.isEmpty(addGenre.text.toString())) {
+            addGenre.error = "Required"
+            result = false
+        } else {
+            addGenre.error = null
+        }
+        return result
     }
 }

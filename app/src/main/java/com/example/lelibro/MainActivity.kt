@@ -3,18 +3,17 @@ package com.example.lelibro
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.ScrollView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
     private lateinit var logoutBtn: ImageButton
@@ -23,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var rv: RecyclerView
     private lateinit var bookAdapter: BookAdapter
     private var ListBook: MutableList<Book> = mutableListOf()
+    private lateinit var bookdb: DatabaseReference
+    private val ADD_BOOK_REQUEST_CODE = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,14 +37,53 @@ class MainActivity : AppCompatActivity() {
         bookAdapter = BookAdapter(this, ListBook)
         rv.adapter = bookAdapter
 
-        logoutBtn.setOnClickListener(){
+        logoutBtn.setOnClickListener() {
             LogoutFun()
         }
 
+        btnAdd.setOnClickListener {
+            val intent = Intent(this, AddBook::class.java)
+            startActivityForResult(intent, ADD_BOOK_REQUEST_CODE)
+        }
+
+        loadBooks()
     }
 
-    private fun LogoutFun(){
-        mAuth!!.signOut()
-        startActivity(Intent(this, intro_page::class.java))
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == ADD_BOOK_REQUEST_CODE && resultCode == RESULT_OK) {
+            loadBooks()
+        }
+    }
+
+    private fun loadBooks() {
+        val currentUser = mAuth.currentUser
+        val userId = currentUser!!.uid
+        bookdb = FirebaseDatabase.getInstance("https://le-libro-default-rtdb.asia-southeast1.firebasedatabase.app/")
+            .getReference("LeLibro")
+
+        bookdb.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                ListBook.clear()
+                for (noteSnapshot in snapshot.children) {
+                    val book = noteSnapshot.getValue(Book::class.java)
+                    book?.id = noteSnapshot.key
+                    if (book != null) {
+                        ListBook.add(book)
+                    }
+                }
+                bookAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@MainActivity, "Failed to load Book.", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun LogoutFun() {
+        mAuth.signOut()
+        Toast.makeText(this, "Logged Out", Toast.LENGTH_SHORT).show()
+        finish()
     }
 }

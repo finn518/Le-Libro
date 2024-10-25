@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomTextInputStyle" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColor">#EFE3C8</item>
+        <item name="android:textColorHint">#EFE3C8</item>
+    </style>
+</resources>

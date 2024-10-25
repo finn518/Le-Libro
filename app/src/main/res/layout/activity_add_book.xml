@@ -79,11 +79,10 @@
                 android:layout_marginRight="30dp"
                 android:background="@drawable/border_input"
                 android:ems="10"
-                android:gravity="start|top"
                 android:inputType="text"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
-                android:text="Judul Buku"
+                android:hint="Judul Buku"
                 android:textColor="#EFE3C8"
                 android:textColorHint="#DADADA" />
 
@@ -96,12 +95,12 @@
                 android:layout_marginRight="30dp"
                 android:background="@drawable/border_input"
                 android:ems="10"
-                android:gravity="start|top"
                 android:inputType="text"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
-                android:text="Penulis"
-                android:textColor="#EFE3C8" />
+                android:hint="Penulis"
+                android:textColor="#EFE3C8"
+                android:textColorHint="#DADADA" />
 
             <EditText
                 android:id="@+id/add_desk"
@@ -112,12 +111,15 @@
                 android:layout_marginRight="30dp"
                 android:background="@drawable/border_input"
                 android:ems="10"
-                android:gravity="start|top"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
-                android:text="Deskripsi"
-                android:textColor="#EFE3C8" />
+                android:hint="Deskripsi"
+                android:textColor="#EFE3C8"
+                android:textColorHint="#DADADA"
+                android:scrollbars="vertical"
+                android:gravity="top|start"
+                android:maxLines="5" />
 
             <EditText
                 android:id="@+id/add_genre"
@@ -132,8 +134,9 @@
                 android:inputType="text"
                 android:paddingLeft="10dp"
                 android:paddingTop="5dp"
-                android:text="Genre"
-                android:textColor="#EFE3C8" />
+                android:hint="Genre"
+                android:textColor="#EFE3C8"
+                android:textColorHint="#DADADA" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_upload"

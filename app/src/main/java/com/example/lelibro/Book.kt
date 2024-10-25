@@ -6,4 +6,5 @@ data class Book (
     var penulis: String? = null,
     var deskripsi: String? = null,
     var genre: String? = null,
+    var cover: String? = null,
 )
