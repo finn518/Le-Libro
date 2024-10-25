@@ -27,22 +27,23 @@ class SplashScreenActivity : AppCompatActivity() {
 
         // Timer to move to Intro Page
         android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-            CheckLogin()
+            startActivity(Intent(this@SplashScreenActivity, intro_page::class.java))
+//            CheckLogin()
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out) // Optional transition animation
             finish()
         }, 3000)
     }
 
-    private fun CheckLogin(){
-        // Cek apakah ada pengguna yang sudah login
-        val currentUser= mAuth.currentUser
-        if (currentUser != null) {
-            // Jika sudah login, langsung ke MainActivity
-            startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
-        } else {
-            // Jika belum login, arahkan ke intro_page
-            startActivity(Intent(this@SplashScreenActivity, intro_page::class.java))
-        }
-        finish()
-    }
+//    private fun CheckLogin(){
+//        // Cek apakah ada pengguna yang sudah login
+//        val currentUser= mAuth.currentUser
+//        if (currentUser != null) {
+//            // Jika sudah login, langsung ke MainActivity
+//            startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+//        } else {
+//            // Jika belum login, arahkan ke intro_page
+//            startActivity(Intent(this@SplashScreenActivity, intro_page::class.java))
+//        }
+//        finish()
+//    }
 }
