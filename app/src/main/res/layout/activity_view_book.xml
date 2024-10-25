@@ -14,7 +14,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="45dp"
-        android:background="#00000"
+        android:background="#000000"
         android:contentDescription="NULL"
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"

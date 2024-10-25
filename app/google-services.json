@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "853769054477",
+    "project_id": "le-libro",
+    "storage_bucket": "le-libro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853769054477:android:ff780e9b3aab5ed3126844",
+        "android_client_info": {
+          "package_name": "com.example.lelibro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrpwnTGAg4e_LqNQLjb5gKJPknAYYy7ho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
