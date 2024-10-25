@@ -29,6 +29,12 @@ class BookAdapter(
     override fun getItemCount(): Int {
         return ListBook.size
     }
+
+    companion object {
+        fun notifyDataSetChanged() {
+            TODO("Not yet implemented")
+        }
+    }
 }
 
 interface DataChangeListener {

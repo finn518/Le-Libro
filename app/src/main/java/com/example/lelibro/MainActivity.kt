@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnAdd: Button
     private lateinit var rv: RecyclerView
     private lateinit var bookAdapter: BookAdapter
-    private lateinit var bookdb: DatabaseReference
     private var ListBook: MutableList<Book> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
