@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var btnAdd: Button
     private lateinit var rv: RecyclerView
-    private lateinit var dark_layout: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

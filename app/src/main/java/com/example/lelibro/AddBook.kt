@@ -12,7 +12,6 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class AddBook : AppCompatActivity() {
-    private lateinit var popup_add: ScrollView
     private lateinit var back_popup: ImageButton
     private lateinit var add_cover: ImageView
     private lateinit var addJudul: EditText
@@ -25,7 +24,6 @@ class AddBook : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_book)
 
-        popup_add = findViewById(R.id.popup_add)
         back_popup = findViewById(R.id.back_popup)
         add_cover = findViewById(R.id.upload_cover)
         addJudul = findViewById(R.id.add_judul)
