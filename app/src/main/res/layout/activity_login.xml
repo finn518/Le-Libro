@@ -77,7 +77,8 @@
                 android:hint="e.g. example@mail.com"
                 android:inputType="text|textEmailAddress"
                 android:paddingLeft="10dp"
-                android:textColorHint="#EFE3C8" />
+                android:textColor="#EFE3C8"
+                android:textColorHint="#80EFE3C8" />
         </LinearLayout>
 
         <LinearLayout
@@ -104,7 +105,8 @@
                 android:hint="*********"
                 android:inputType="text|textPassword"
                 android:paddingLeft="10dp"
-                android:textColorHint="#EFE3C8" />
+                android:textColor="#EFE3C8"
+                android:textColorHint="#80EFE3C8" />
         </LinearLayout>
 
     </LinearLayout>

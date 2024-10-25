@@ -45,7 +45,7 @@
         android:paddingRight="95dp"
         android:text="Tambah Buku"
         android:textSize="16sp"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -67,7 +67,7 @@
         android:id="@+id/dark"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,9 +75,10 @@
         app:srcCompat="@drawable/dark_lyt" />
 
     <ScrollView
+        android:id="@+id/popup_add"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -100,7 +101,7 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imageButton"
+                    android:id="@+id/back_popup"
                     android:layout_width="0dp"
                     android:layout_height="45dp"
                     android:layout_weight="1"
@@ -123,7 +124,7 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/upload_cover"
                 android:layout_width="170dp"
                 android:layout_height="250dp"
                 android:layout_gravity="center"
@@ -131,7 +132,7 @@
                 app:srcCompat="@drawable/upload_cover" />
 
             <EditText
-                android:id="@+id/editTextText"
+                android:id="@+id/add_judul"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="30dp"
@@ -149,7 +150,7 @@
                 android:visibility="visible" />
 
             <EditText
-                android:id="@+id/editTextText2"
+                android:id="@+id/add_penulis"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="30dp"
@@ -165,7 +166,7 @@
                 android:textColor="#EFE3C8" />
 
             <EditText
-                android:id="@+id/editTextText3"
+                android:id="@+id/add_desk"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
                 android:layout_marginLeft="30dp"
@@ -181,7 +182,7 @@
                 android:textColor="#EFE3C8" />
 
             <EditText
-                android:id="@+id/editTextText4"
+                android:id="@+id/add_genre"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="30dp"
@@ -197,7 +198,7 @@
                 android:textColor="#EFE3C8" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button3"
+                android:id="@+id/btn_upload"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
