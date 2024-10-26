@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Edit">
+
+    <ImageView
+        android:id="@+id/dark"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dark_lyt" />
+
+    <ScrollView
+        android:id="@+id/edit"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/back_popup"
+                    android:layout_width="0dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="1"
+                    android:background="@color/black"
+                    android:contentDescription="NULL"
+                    app:srcCompat="@drawable/back_main"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="270dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rosarivo"
+                    android:gravity="center"
+                    android:text="Edit Buku"
+                    android:textColor="#EFE3C8"
+                    android:textSize="34sp" />
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="170dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="36dp"
+                app:cardCornerRadius="10dp">
+
+                <ImageView
+                    android:id="@+id/upload_cover"
+                    android:layout_width="170dp"
+                    android:layout_height="250dp"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/empty_img" />
+            </androidx.cardview.widget.CardView>
+
+            <EditText
+                android:id="@+id/add_judul"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/border_input"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:text="Judul Buku"
+                android:textColor="#EFE3C8"
+                android:textColorHint="#DADADA"
+                android:visibility="visible" />
+
+            <EditText
+                android:id="@+id/add_penulis"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/border_input"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:text="Penulis"
+                android:textColor="#EFE3C8" />
+
+            <EditText
+                android:id="@+id/add_desk"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/border_input"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:text="Deskripsi"
+                android:textColor="#EFE3C8" />
+
+            <EditText
+                android:id="@+id/add_genre"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/border_input"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="text"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:text="Genre"
+                android:textColor="#EFE3C8" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_upload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/radius_btn"
+                android:text="Simpan"
+                android:textColor="#4A2B29"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

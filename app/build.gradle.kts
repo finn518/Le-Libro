@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
-    id("kotlin-kapt")
+//    id("kotlin-kapt")
 }
 
 android {
@@ -49,8 +49,10 @@ dependencies {
     implementation(libs.firebase.storage)
     implementation("com.github.bumptech.glide:glide:4.15.1")
     implementation("com.google.android.material:material:1.9.0")
+    implementation(libs.firebase.firestore)
 
-    kapt("com.github.bumptech.glide:compiler:4.15.1")
+//    kapt("com.github.bumptech.glide:compiler:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
