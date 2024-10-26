@@ -208,7 +208,7 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/radius_btn"
-                android:text="Tambah"
+                android:text="Simpan"
                 android:textColor="#4A2B29"
                 android:textSize="20sp" />
 

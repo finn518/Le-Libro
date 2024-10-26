@@ -46,6 +46,9 @@
             android:layout_marginRight="12dp"
             android:fontFamily="@font/rosarivo"
             android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:scrollHorizontally="false"
             android:text="Judul"
             android:textColor="#FFFFFF"
             android:textSize="20dp" />
@@ -59,6 +62,9 @@
             android:layout_marginRight="12dp"
             android:fontFamily="@font/rosarivo"
             android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:scrollHorizontally="false"
             android:text="Penulis"
             android:textColor="#FFFFFF"
             android:textSize="18dp" />
