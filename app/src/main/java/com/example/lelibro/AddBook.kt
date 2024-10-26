@@ -37,7 +37,7 @@ class AddBook : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_book)
 
-        back_popup = findViewById(R.id.back_popup)
+        back_popup = findViewById(R.id.back_add)
         add_cover = findViewById(R.id.upload_cover)
         addJudul = findViewById(R.id.add_judul)
         addPenulis = findViewById(R.id.add_penulis)

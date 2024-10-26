@@ -8,41 +8,35 @@
     android:layout_height="match_parent"
     tools:context=".AddBook">
 
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageButton
+        android:id="@+id/back_add"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="45dp"
+        android:background="#000000"
+        android:contentDescription="NULL"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_main"
+        tools:ignore="TouchTargetSizeCheck" />
 
-        <ImageButton
-            android:id="@+id/back_popup"
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:background="@color/black"
-            android:contentDescription="NULL"
-            app:srcCompat="@drawable/back_main"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="270dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/rosarivo"
-            android:gravity="center"
-            android:text="Tambah Buku"
-            android:textColor="#EFE3C8"
-            android:textSize="34sp" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/rosarivo"
+        android:gravity="center"
+        android:layout_marginTop="45dp"
+        android:layout_marginRight="30dp"
+        android:text="Tambah Buku"
+        android:textColor="#EFE3C8"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_add"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -52,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -90,8 +84,8 @@
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp"
                 app:boxStrokeColor="#EFE3C8"
-                app:boxStrokeWidthFocused="2dp"
                 app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="2dp"
                 app:endIconMode="clear_text"
                 app:endIconTint="#EFE3C8"
                 app:endIconTintMode="multiply"
@@ -116,15 +110,15 @@
                 android:layout_marginRight="30dp"
                 android:hint="Penulis"
                 android:textColorHint="#EFE3C9"
-                app:boxStrokeColor="#EFE3C8"
-                app:boxStrokeWidthFocused="2dp"
-                app:boxStrokeWidth="2dp"
                 app:boxBackgroundColor="#1C1C1C"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="#EFE3C8"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="2dp"
                 app:endIconMode="clear_text"
                 app:endIconTint="#EFE3C8"
                 app:endIconTintMode="multiply"
@@ -148,14 +142,14 @@
                 android:layout_marginRight="30dp"
                 android:hint="Deskripsi"
                 android:textColorHint="#EFE3C9"
-                app:boxStrokeColor="#EFE3C8"
-                app:boxStrokeWidthFocused="2dp"
-                app:boxStrokeWidth="2dp"
                 app:boxBackgroundColor="#1C1C1C"
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="#EFE3C8"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="2dp"
                 app:endIconMode="clear_text"
                 app:endIconTint="#EFE3C8"
                 app:endIconTintMode="multiply">
@@ -181,15 +175,15 @@
                 android:layout_marginRight="30dp"
                 android:hint="Genre"
                 android:textColorHint="#EFE3C9"
-                app:boxStrokeColor="#EFE3C8"
-                app:boxStrokeWidthFocused="2dp"
-                app:boxStrokeWidth="2dp"
                 app:boxBackgroundColor="#1C1C1C"
                 app:boxBackgroundMode="outline"
                 app:boxCornerRadiusBottomEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="#EFE3C8"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="2dp"
                 app:endIconMode="clear_text"
                 app:endIconTint="#EFE3C8"
                 app:endIconTintMode="multiply"
