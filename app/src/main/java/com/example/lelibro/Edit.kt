@@ -13,76 +13,84 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 
-class AddBook : AppCompatActivity() {
-    private lateinit var back_popup: ImageButton
-    private lateinit var add_cover: ImageView
-    private lateinit var addJudul: EditText
-    private lateinit var addPenulis: EditText
-    private lateinit var addDesk: EditText
-    private lateinit var addGenre: EditText
-    private lateinit var upItem: Button
+class Edit : AppCompatActivity() {
+    private lateinit var back_update: ImageButton
+    private lateinit var edit_cover: ImageView
+    private lateinit var edit_judul: EditText
+    private lateinit var edit_penulis: EditText
+    private lateinit var edit_desk: EditText
+    private lateinit var edit_genre: EditText
+    private lateinit var btn_update: Button
     private lateinit var bookdb: DatabaseReference
-    private var ListBook: MutableList<Book> = mutableListOf()
+    private var bookId: String? = null
+    private var currentCoverUrl: String? = null
     private val DEFAULT_IMAGE_URL = "https://drive.google.com/file/d/102OuLDql0GymVcHPJpQwxgK05aUD1Puu/view?usp=sharing"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_book)
+        setContentView(R.layout.activity_edit)
 
-        back_popup = findViewById(R.id.back_popup)
-        add_cover = findViewById(R.id.upload_cover)
-        addJudul = findViewById(R.id.add_judul)
-        addPenulis = findViewById(R.id.add_penulis)
-        addDesk = findViewById(R.id.add_desk)
-        addGenre = findViewById(R.id.add_genre)
-        upItem = findViewById(R.id.btn_upload)
+        back_update = findViewById(R.id.back_edit)
+        edit_cover = findViewById(R.id.edit_cover)
+        edit_judul = findViewById(R.id.edit_judul)
+        edit_penulis = findViewById(R.id.edit_penulis)
+        edit_desk = findViewById(R.id.edit_desk)
+        edit_genre = findViewById(R.id.edit_genre)
+        btn_update = findViewById(R.id.btn_update)
 
         bookdb = FirebaseDatabase.getInstance("https://le-libro-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("LeLibro")
 
-        back_popup.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+        val intent = intent
+        bookId = intent.getStringExtra("id")
+        edit_judul.setText(intent.getStringExtra("title"))
+        edit_penulis.setText(intent.getStringExtra("author"))
+        edit_desk.setText(intent.getStringExtra("desk"))
+        edit_genre.setText(intent.getStringExtra("genre"))
+        currentCoverUrl = intent.getStringExtra("img")
+        Glide.with(this).load(currentCoverUrl).into(edit_cover)
+
+        back_update.setOnClickListener {
+//            startActivity(Intent(this, viewBook::class.java))
+            finish()
         }
 
-        upItem.setOnClickListener {
-            if (!validateForm()) {
-                return@setOnClickListener
-            }
-            val bookId = bookdb.push().key ?: return@setOnClickListener
-            uploadImg(bookId) { imageUrl ->
-                saveBookData(bookId, imageUrl)
-            }
-        }
-
-        add_cover.setOnClickListener {
+        edit_cover.setOnClickListener {
             selectImage()
+        }
+
+        btn_update.setOnClickListener {
+            if (validateForm()) {
+                uploadImg(bookId!!) { imageUrl ->
+                    updateBookData(imageUrl)
+                }
+            }
         }
     }
 
     private fun selectImage() {
         val items = arrayOf<CharSequence>("Take Photo", "Choose from Library", "Cancel")
-        val builder = AlertDialog.Builder(this)
-        builder.setIcon(R.mipmap.ic_launcher)
+        val builder = androidx.appcompat.app.AlertDialog.Builder(this)
         builder.setItems(items) { dialog, item ->
-            when {
-                items[item] == "Take Photo" -> {
+            when (items[item]) {
+                "Take Photo" -> {
                     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     startActivityForResult(intent, 10)
                 }
-                items[item] == "Choose from Library" -> {
+                "Choose from Library" -> {
                     val intent = Intent(Intent.ACTION_PICK)
                     intent.type = "image/*"
                     startActivityForResult(Intent.createChooser(intent, "Select Image"), 20)
                 }
-                items[item] == "Cancel" -> dialog.dismiss()
+                "Cancel" -> dialog.dismiss()
             }
         }
         builder.show()
@@ -96,22 +104,20 @@ class AddBook : AppCompatActivity() {
                 try {
                     val inputStream = contentResolver.openInputStream(path!!)
                     val bitmap = BitmapFactory.decodeStream(inputStream)
-                    add_cover.post {
-                        add_cover.setImageBitmap(bitmap)
+                    edit_cover.post {
+                        edit_cover.setImageBitmap(bitmap)
                     }
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
             }
             thread.start()
-        }
-
-        if (requestCode == 10 && resultCode == RESULT_OK) {
+        } else if (requestCode == 10 && resultCode == RESULT_OK) {
             val extras = data?.extras
             val thread = Thread {
                 val bitmap = extras?.get("data") as Bitmap
-                add_cover.post {
-                    add_cover.setImageBitmap(bitmap)
+                edit_cover.post {
+                    edit_cover.setImageBitmap(bitmap)
                 }
             }
             thread.start()
@@ -119,13 +125,13 @@ class AddBook : AppCompatActivity() {
     }
 
     private fun uploadImg(bookId: String, onComplete: (String) -> Unit) {
-        if (add_cover.drawable == null) {
-            onComplete(DEFAULT_IMAGE_URL)
+        if (edit_cover.drawable == null) {
+            onComplete(currentCoverUrl ?: DEFAULT_IMAGE_URL)
             return
         }
-        add_cover.isDrawingCacheEnabled = true
-        add_cover.buildDrawingCache()
-        val drawable = add_cover.drawable
+        edit_cover.isDrawingCacheEnabled = true
+        edit_cover.buildDrawingCache()
+        val drawable = edit_cover.drawable
         if (drawable is BitmapDrawable) {
             val bitmap = drawable.bitmap
             val baos = ByteArrayOutputStream()
@@ -135,32 +141,32 @@ class AddBook : AppCompatActivity() {
             val storage = FirebaseStorage.getInstance()
             val storageRef = storage.reference.child("images/$bookId.jpeg")
             val uploadTask = storageRef.putBytes(data)
-            uploadTask.addOnFailureListener { exception ->
-                Toast.makeText(this, "Failed to upload image: ${exception.message}", Toast.LENGTH_SHORT).show()
-                onComplete(DEFAULT_IMAGE_URL)
-            }.addOnSuccessListener { taskSnapshot ->
+            uploadTask.addOnSuccessListener { taskSnapshot ->
                 taskSnapshot.metadata?.reference?.downloadUrl?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         val downloadUrl = task.result.toString()
                         onComplete(downloadUrl)
                     } else {
                         Toast.makeText(this, "Failed to get download URL", Toast.LENGTH_SHORT).show()
-                        onComplete(DEFAULT_IMAGE_URL)
+                        onComplete(currentCoverUrl ?: DEFAULT_IMAGE_URL)
                     }
                 }
+            }.addOnFailureListener {
+                Toast.makeText(this, "Failed to upload image", Toast.LENGTH_SHORT).show()
+                onComplete(currentCoverUrl ?: DEFAULT_IMAGE_URL)
             }
         } else {
-            onComplete(DEFAULT_IMAGE_URL)
+            onComplete(currentCoverUrl ?: DEFAULT_IMAGE_URL)
         }
     }
 
-    private fun saveBookData(bookId: String, imageUrl: String) {
-        val judul = addJudul.text.toString()
-        val penulis = addPenulis.text.toString()
-        val desc = addDesk.text.toString()
-        val genre = addGenre.text.toString()
+    private fun updateBookData(imageUrl: String) {
+        val judul = edit_judul.text.toString()
+        val penulis = edit_penulis.text.toString()
+        val desc = edit_desk.text.toString()
+        val genre = edit_genre.text.toString()
 
-        val books = Book(
+        val updatedBook = Book(
             id = bookId,
             judul = judul,
             penulis = penulis,
@@ -168,40 +174,33 @@ class AddBook : AppCompatActivity() {
             genre = genre,
             cover = imageUrl
         )
-        bookdb.child(bookId).setValue(books).addOnSuccessListener {
-            Toast.makeText(this@AddBook, "Book added", Toast.LENGTH_SHORT).show()
-            setResult(RESULT_OK)
+
+        bookdb.child(bookId!!).setValue(updatedBook).addOnSuccessListener {
+            Toast.makeText(this, "Book updated successfully", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }.addOnFailureListener {
-            Toast.makeText(this@AddBook, "Failed to add book", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Failed to update book", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun validateForm(): Boolean {
         var result = true
-        if (TextUtils.isEmpty(addJudul.text.toString())) {
-            addJudul.error = "Required"
+        if (TextUtils.isEmpty(edit_judul.text.toString())) {
+            edit_judul.error = "Required"
             result = false
-        } else {
-            addJudul.error = null
         }
-        if (TextUtils.isEmpty(addPenulis.text.toString())) {
-            addPenulis.error = "Required"
+        if (TextUtils.isEmpty(edit_penulis.text.toString())) {
+            edit_penulis.error = "Required"
             result = false
-        } else {
-            addPenulis.error = null
         }
-        if (TextUtils.isEmpty(addDesk.text.toString())) {
-            addDesk.error = "Required"
+        if (TextUtils.isEmpty(edit_desk.text.toString())) {
+            edit_desk.error = "Required"
             result = false
-        } else {
-            addDesk.error = null
         }
-        if (TextUtils.isEmpty(addGenre.text.toString())) {
-            addGenre.error = "Required"
+        if (TextUtils.isEmpty(edit_genre.text.toString())) {
+            edit_genre.error = "Required"
             result = false
-        } else {
-            addGenre.error = null
         }
         return result
     }
