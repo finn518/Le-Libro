@@ -1,8 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.LeLibro" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.LeLibro" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorAccent">#EFE3C8</item>
+        <item name="colorPrimary">#EFE3C8</item>
+        <item name="colorPrimaryVariant">@color/cream</item>
+
     </style>
 
     <style name="Theme.LeLibro" parent="Base.Theme.LeLibro" />

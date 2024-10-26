@@ -8,59 +8,63 @@
     android:layout_height="match_parent"
     tools:context=".AddBook">
 
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/back_popup"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:contentDescription="NULL"
+            app:srcCompat="@drawable/back_main"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/rosarivo"
+            android:gravity="center"
+            android:text="Tambah Buku"
+            android:textColor="#EFE3C8"
+            android:textSize="34sp" />
+    </LinearLayout>
+
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="20dp"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/back_popup"
-                    android:layout_width="0dp"
-                    android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:background="@color/black"
-                    android:contentDescription="NULL"
-                    app:srcCompat="@drawable/back_main"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-                <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="270dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="50dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/rosarivo"
-                    android:gravity="center"
-                    android:text="Tambah Buku"
-                    android:textColor="#EFE3C8"
-                    android:textSize="34sp" />
-            </LinearLayout>
-
             <androidx.cardview.widget.CardView
                 android:layout_width="170dp"
                 android:layout_height="250dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="36dp"
-                app:cardCornerRadius="10dp"
-                android:layout_gravity="center">
+                app:cardCornerRadius="10dp">
 
                 <ImageView
                     android:id="@+id/upload_cover"
@@ -70,73 +74,127 @@
                     app:srcCompat="@drawable/upload_cover" />
             </androidx.cardview.widget.CardView>
 
-            <EditText
-                android:id="@+id/add_judul"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
-                android:background="@drawable/border_input"
-                android:ems="10"
-                android:inputType="text"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
                 android:hint="Judul Buku"
-                android:textColor="#EFE3C8"
-                android:textColorHint="#DADADA" />
+                android:textColorHint="#EFE3C9"
+                app:boxBackgroundColor="#1C1C1C"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="#EFE3C8"
+                app:endIconMode="clear_text"
+                app:endIconTint="#EFE3C8"
+                app:endIconTintMode="multiply"
+                app:hintTextAppearance="@style/CustomTextInputStyle">
 
-            <EditText
-                android:id="@+id/add_penulis"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/add_judul"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:textColor="#EFE3C8"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
-                android:background="@drawable/border_input"
-                android:ems="10"
-                android:inputType="text"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
                 android:hint="Penulis"
-                android:textColor="#EFE3C8"
-                android:textColorHint="#DADADA" />
+                android:textColorHint="#EFE3C9"
+                app:boxBackgroundColor="#1C1C1C"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="#EFE3C8"
+                app:endIconMode="clear_text"
+                app:endIconTint="#EFE3C8"
+                app:endIconTintMode="multiply"
+                app:hintTextAppearance="@style/CustomTextInputStyle">
 
-            <EditText
-                android:id="@+id/add_desk"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/add_penulis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:textColor="#EFE3C8"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
-                android:background="@drawable/border_input"
-                android:ems="10"
-                android:inputType="textMultiLine"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
                 android:hint="Deskripsi"
-                android:textColor="#EFE3C8"
-                android:textColorHint="#DADADA"
-                android:scrollbars="vertical"
-                android:gravity="top|start"
-                android:maxLines="5" />
+                android:textColorHint="#EFE3C9"
+                app:boxBackgroundColor="#1C1C1C"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="#EFE3C8"
+                app:endIconMode="clear_text"
+                app:endIconTint="#EFE3C8"
+                app:endIconTintMode="multiply">
 
-            <EditText
-                android:id="@+id/add_genre"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/add_desk"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:gravity="top|start"
+                    android:inputType="textMultiLine"
+                    android:padding="16dp"
+                    android:scrollbars="vertical"
+                    android:textColor="#EFE3C8"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
-                android:background="@drawable/border_input"
-                android:ems="10"
-                android:gravity="start|top"
-                android:inputType="text"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
                 android:hint="Genre"
-                android:textColor="#EFE3C8"
-                android:textColorHint="#DADADA" />
+                android:textColorHint="#EFE3C9"
+                app:boxBackgroundColor="#1C1C1C"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="#EFE3C8"
+                app:endIconMode="clear_text"
+                app:endIconTint="#EFE3C8"
+                app:endIconTintMode="multiply"
+                app:hintTextAppearance="@style/CustomTextInputStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/add_genre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:textColor="#EFE3C8"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_upload"
@@ -145,6 +203,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="60dp"
                 android:layout_marginRight="30dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/radius_btn"
                 android:text="Tambah"
                 android:textColor="#4A2B29"

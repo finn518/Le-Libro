@@ -36,7 +36,7 @@ class AddBook : AppCompatActivity() {
     private lateinit var upItem: Button
     private lateinit var bookdb: DatabaseReference
     private var ListBook: MutableList<Book> = mutableListOf()
-    private val DEFAULT_IMAGE_URL = "https://drive.google.com/file/d/102OuLDql0GymVcHPJpQwxgK05aUD1Puu/view"
+    private val DEFAULT_IMAGE_URL = "https://drive.google.com/file/d/102OuLDql0GymVcHPJpQwxgK05aUD1Puu/view?usp=sharing"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
