@@ -136,8 +136,8 @@
                 android:ems="10"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:hint="NULL"
-                android:textColor="#EFE3C8"
+                android:hint="*********"
+                android:textColorHint="#80EFE3C8"
                 android:inputType="text|textPassword" />
         </LinearLayout>
 

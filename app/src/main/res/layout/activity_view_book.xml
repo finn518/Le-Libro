@@ -137,7 +137,8 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/radius_btn"
-                android:text="Edit Buku" />
+                android:text="Edit Buku"
+                android:textColor="#1C161E"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/deleteBtn"
