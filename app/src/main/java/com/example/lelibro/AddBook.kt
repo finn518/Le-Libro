@@ -3,6 +3,7 @@ package com.example.lelibro
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -36,6 +37,7 @@ class AddBook : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_book)
+        window.statusBarColor = Color.BLACK
 
         back_popup = findViewById(R.id.back_add)
         add_cover = findViewById(R.id.upload_cover)

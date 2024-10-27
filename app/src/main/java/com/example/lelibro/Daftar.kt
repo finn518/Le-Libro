@@ -1,6 +1,7 @@
 package com.example.lelibro
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
@@ -26,6 +27,9 @@ class Daftar : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_daftar)
+        window.decorView.systemUiVisibility = 0
+        window.navigationBarColor = Color.BLACK
+        window.statusBarColor = Color.BLACK
 
         backToIntro = findViewById(R.id.backToIntro)
         emailDaftar = findViewById(R.id.daftarEmail)

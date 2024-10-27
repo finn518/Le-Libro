@@ -10,8 +10,8 @@
 
     <ImageButton
         android:id="@+id/back_add"
-        android:layout_width="30dp"
-        android:layout_height="40dp"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="45dp"
         android:background="#000000"
@@ -24,17 +24,18 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:layout_marginRight="30dp"
         android:layout_weight="1"
         android:fontFamily="@font/rosarivo"
         android:gravity="center"
-        android:layout_marginTop="45dp"
-        android:layout_marginRight="30dp"
         android:text="Tambah Buku"
         android:textColor="#EFE3C8"
-        android:textSize="30dp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.434"
         app:layout_constraintStart_toEndOf="@+id/back_add"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,6 +43,7 @@
         android:id="@+id/scrollView3"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

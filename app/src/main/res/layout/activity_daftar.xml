@@ -13,27 +13,27 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="31dp"
-        android:layout_marginTop="77dp"
+        android:layout_marginTop="90dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.125">
+        app:layout_constraintVertical_bias="0.0">
 
         <ImageButton
             android:id="@+id/backToIntro"
             android:layout_width="30dp"
             android:layout_height="40dp"
-            android:contentDescription="NULL"
             android:background="@drawable/back_btn"
+            android:contentDescription="NULL"
             tools:ignore="TouchTargetSizeCheck" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="90dp"
             android:fontFamily="@font/rosarivo"
             android:gravity="center"
             android:padding="30dp"

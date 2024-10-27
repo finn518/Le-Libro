@@ -1,6 +1,7 @@
 package com.example.lelibro
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        window.statusBarColor = Color.BLACK
 
         btnAdd = findViewById(R.id.btn_add)
         rv = findViewById(R.id.rv)
@@ -76,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@MainActivity, "Failed to load Book.", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this@MainActivity, "Failed to load Book.", Toast.LENGTH_SHORT).show()
             }
         })
     }

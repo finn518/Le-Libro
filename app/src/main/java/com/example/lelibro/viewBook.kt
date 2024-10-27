@@ -13,6 +13,7 @@ import android.Manifest
 import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -55,6 +56,9 @@ class viewBook : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_view_book)
+        window.decorView.systemUiVisibility = 0
+        window.navigationBarColor = Color.BLACK
+        window.statusBarColor = Color.BLACK
 
         detailImg = findViewById(R.id.detailImage)
         detailTitle = findViewById(R.id.detailTitle)

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000"
@@ -10,8 +11,8 @@
 
     <ImageButton
         android:id="@+id/backToMain"
-        android:layout_width="30dp"
-        android:layout_height="40dp"
+        android:layout_width="25dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="45dp"
         android:background="#000000"
@@ -32,7 +33,7 @@
         android:gravity="center"
         android:text="Deskripsi Buku"
         android:textColor="#EFE3C8"
-        android:textSize="30dp"
+        android:textSize="24dp"
         android:paddingRight="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/backToMain"
@@ -43,6 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="visible"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -51,7 +53,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -59,9 +62,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="110dp"
+                android:layout_marginLeft="95dp"
                 android:layout_marginTop="30dp"
-                android:layout_marginRight="110dp"
+                android:layout_marginRight="95dp"
                 app:cardCornerRadius="15dp">
 
                 <ImageView
@@ -78,6 +81,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_marginTop="30dp"
                 android:fontFamily="@font/rosarivo"
                 android:text="TITTLE"
@@ -147,7 +153,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/border_btn"
                 android:text="Hapus"
                 android:textColor="#EFE3C8" />
@@ -207,10 +213,7 @@
             android:id="@+id/cancel_delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="30dp"
+            android:layout_margin="20dp"
             android:background="@drawable/border_btn"
             android:text="Tidak"
             android:textColor="#EFE3C8"

@@ -3,6 +3,7 @@ package com.example.lelibro
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -37,6 +38,7 @@ class Edit : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit)
+        window.statusBarColor = Color.BLACK
 
         back_update = findViewById(R.id.back_edit)
         edit_cover = findViewById(R.id.edit_cover)
