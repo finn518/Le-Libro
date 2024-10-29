@@ -205,9 +205,6 @@ class viewBook : AppCompatActivity() {
         }
     }
 
-
-
-
     private fun DeleteBook() {
         var ref: DatabaseReference = FirebaseDatabase.getInstance("https://le-libro-default-rtdb.asia-southeast1.firebasedatabase.app/")
             .getReference("LeLibro")

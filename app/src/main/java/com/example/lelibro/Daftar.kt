@@ -81,7 +81,7 @@ class Daftar : AppCompatActivity() {
         if (user != null){
             startActivity(Intent(this, intro_page::class.java))
         } else {
-            Toast.makeText(this, "Daftar Dulu", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Password Wajib 8 Karakter", Toast.LENGTH_LONG).show()
         }
     }
 

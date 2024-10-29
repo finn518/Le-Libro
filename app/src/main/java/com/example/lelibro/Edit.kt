@@ -79,20 +79,20 @@ class Edit : AppCompatActivity() {
     }
 
     private fun selectImage() {
-        val items = arrayOf<CharSequence>("Take Photo", "Choose from Library", "Cancel")
+        val items = arrayOf<CharSequence>("Ambil Foto", "Pilih dari galeri", "Batal")
         val builder = androidx.appcompat.app.AlertDialog.Builder(this)
         builder.setItems(items) { dialog, item ->
             when (items[item]) {
-                "Take Photo" -> {
+                "Ambil Foto" -> {
                     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     startActivityForResult(intent, 10)
                 }
-                "Choose from Library" -> {
+                "Pilih dari galeri" -> {
                     val intent = Intent(Intent.ACTION_PICK)
                     intent.type = "image/*"
                     startActivityForResult(Intent.createChooser(intent, "Select Image"), 20)
                 }
-                "Cancel" -> dialog.dismiss()
+                "Batal" -> dialog.dismiss()
             }
         }
         builder.show()
@@ -178,30 +178,30 @@ class Edit : AppCompatActivity() {
         )
 
         bookdb.child(bookId!!).setValue(updatedBook).addOnSuccessListener {
-            Toast.makeText(this, "Book updated successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Buku berhasil diupdate", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }.addOnFailureListener {
-            Toast.makeText(this, "Failed to update book", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Gagal mengupdate buku", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun validateForm(): Boolean {
         var result = true
         if (TextUtils.isEmpty(edit_judul.text.toString())) {
-            edit_judul.error = "Required"
+            edit_judul.error = "Wajib diisi"
             result = false
         }
         if (TextUtils.isEmpty(edit_penulis.text.toString())) {
-            edit_penulis.error = "Required"
+            edit_penulis.error = "Wajib diisi"
             result = false
         }
         if (TextUtils.isEmpty(edit_desk.text.toString())) {
-            edit_desk.error = "Required"
+            edit_desk.error = "Wajib diisi"
             result = false
         }
         if (TextUtils.isEmpty(edit_genre.text.toString())) {
-            edit_genre.error = "Required"
+            edit_genre.error = "Wajib diisi"
             result = false
         }
         return result

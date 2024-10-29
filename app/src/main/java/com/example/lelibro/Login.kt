@@ -67,7 +67,7 @@ class Login : AppCompatActivity() {
         if (user != null){
             startActivity(Intent(this, MainActivity::class.java))
         } else {
-            Toast.makeText(this, "Daftar Dulu", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Daftar Akun Terlebih Dahulu", Toast.LENGTH_LONG).show()
         }
     }
 

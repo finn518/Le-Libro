@@ -194,9 +194,9 @@
             android:layout_marginRight="20dp"
             android:fontFamily="@font/rosarivo"
             android:gravity="center"
-            android:text="Yakin ingin menghapus Buku?"
+            android:text="Yakin ingin menghapus buku?"
             android:textColor="#EFE3C8"
-            android:textSize="30dp" />
+            android:textSize="25dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/delete_confirm"

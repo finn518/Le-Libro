@@ -70,21 +70,21 @@ class AddBook : AppCompatActivity() {
     }
 
     private fun selectImage() {
-        val items = arrayOf<CharSequence>("Take Photo", "Choose from Library", "Cancel")
+        val items = arrayOf<CharSequence>("Ambil Foto", "Pilih dari galeri", "Batal")
         val builder = AlertDialog.Builder(this)
         builder.setIcon(R.mipmap.ic_launcher)
         builder.setItems(items) { dialog, item ->
             when {
-                items[item] == "Take Photo" -> {
+                items[item] == "Ambil Foto" -> {
                     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     startActivityForResult(intent, 10)
                 }
-                items[item] == "Choose from Library" -> {
+                items[item] == "Pilih dari galeri" -> {
                     val intent = Intent(Intent.ACTION_PICK)
                     intent.type = "image/*"
                     startActivityForResult(Intent.createChooser(intent, "Select Image"), 20)
                 }
-                items[item] == "Cancel" -> dialog.dismiss()
+                items[item] == "Batal" -> dialog.dismiss()
             }
         }
         builder.show()
@@ -171,36 +171,36 @@ class AddBook : AppCompatActivity() {
             cover = imageUrl
         )
         bookdb.child(bookId).setValue(books).addOnSuccessListener {
-            Toast.makeText(this@AddBook, "Book added", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AddBook, "Buku berhasil ditambah", Toast.LENGTH_SHORT).show()
             setResult(RESULT_OK)
             finish()
         }.addOnFailureListener {
-            Toast.makeText(this@AddBook, "Failed to add book", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@AddBook, "Gagal menambahkan buku", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun validateForm(): Boolean {
         var result = true
         if (TextUtils.isEmpty(addJudul.text.toString())) {
-            addJudul.error = "Required"
+            addJudul.error = "Wajib diisi"
             result = false
         } else {
             addJudul.error = null
         }
         if (TextUtils.isEmpty(addPenulis.text.toString())) {
-            addPenulis.error = "Required"
+            addPenulis.error = "Wajib diisi"
             result = false
         } else {
             addPenulis.error = null
         }
         if (TextUtils.isEmpty(addDesk.text.toString())) {
-            addDesk.error = "Required"
+            addDesk.error = "Wajib diisi"
             result = false
         } else {
             addDesk.error = null
         }
         if (TextUtils.isEmpty(addGenre.text.toString())) {
-            addGenre.error = "Required"
+            addGenre.error = "Wajib diisi"
             result = false
         } else {
             addGenre.error = null
